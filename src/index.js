@@ -12,7 +12,10 @@ async function get_data(url) {
 }
 
 app.get("/", async (req, res) => {
-  const url = "https://siddh-kivtechs.github.io/menu_kivtechs_json/part_10.json";
+    let lat = req.headers['x-vercel-ip-latitude'];
+  let lon = req.headers['x-vercel-ip-longitude'];
+    const key= process.env.weather_key;
+  const url = `https://pro.openweathermap.org/data/2.5/forecast/climate?lat=${lat}&lon=${lon}&appid=${key}&units=metric`;
   // await the get_data call and send the result
   res.send(await get_data(url));
 });
