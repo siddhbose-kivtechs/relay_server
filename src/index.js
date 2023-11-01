@@ -43,7 +43,7 @@ app.use('*', async (req, res) => {
   };
 
   const response = await fetchCompletion();
-  res.send(response.data);
+  res.send(response);
 });
 
 app.listen(PORT, () => {
