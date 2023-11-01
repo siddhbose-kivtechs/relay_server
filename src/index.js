@@ -13,7 +13,7 @@ async function fetchCompletion() {
   try {  
     const response = await axios.post(`${openaiUrl}v1/engines/${engine}/completions`, data, { headers: headers });  
     return response;
-    console.log(response.data);  
+    console.log(response);  
   } catch (error) {  
     console.error(error);  
     return error;
