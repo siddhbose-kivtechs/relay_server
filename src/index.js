@@ -1,22 +1,34 @@
 import express from 'express';
 // import axios or got instead of node-fetch
-const axios = require('axios/dist/node/axios.cjs'); // node
+import axios from 'axios';
+import cors from 'cors';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-
-async function get_data(url) {
-  // use axios or got to fetch the data and return the text
-  const response = await axios.get(url);
-  return response.data;
-}
-
-app.get("/", async (req, res) => {
-
-    const url = "https://siddh-kivtechs.github.io/menu_kivtechs_json/part_10.json";
-  // await the get_data call and send the result
-  res.send(await get_data(url));
-});
+app.use(cors());
+app.use('*', async (req, res) => {  
+    const text = req.body.text;  
+      
+    const azureOpenAIPayload = {  
+        "documents": [{  
+            "language": "en",  
+            "id": "1",  
+            "text": text  
+        }]  
+    };  
+      
+    try {  
+        const response = await axios.post('https://YOUR_RESOURCE_NAME.cognitiveservices.azure.com/text/analytics/v3.1-preview.5/languages', azureOpenAIPayload, {  
+            headers: {  
+                'Ocp-Apim-Subscription-Key': 'YOUR_AZURE_OPENAI_KEY'  
+            }  
+        });  
+          
+        res.send(response.data);  
+    } catch (error) {  
+        res.status(500).send(error.message);  
+    }  
+}); 
 
 app.listen(PORT, () => {
   console.log(`API is listening on port ${PORT}`);
