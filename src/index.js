@@ -8,6 +8,8 @@ const openaiKey = process.env.OPENAI_API_KEY;
 const engine = 'gpt-35-turbo';
 
 const app = express();
+const PORT = process.env.PORT || 3000;
+app.use(cors());
 
 async function fetchCompletion() {
   try {
@@ -23,8 +25,7 @@ async function fetchCompletion() {
   }
 }
 
-const PORT = process.env.PORT || 3000;
-app.use(cors());
+
 app.use('*', async (req, res) => {
   const headers = {
     'Content-Type': 'application/json',
@@ -42,7 +43,7 @@ app.use('*', async (req, res) => {
     presence_penalty: 0,
   };
 
-  const response = await fetchCompletion();
+  const response = await fetchCompletion(data);
   res.send(response);
 });
 
