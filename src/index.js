@@ -2,33 +2,53 @@ import express from 'express';
 // import axios or got instead of node-fetch
 import axios from 'axios';
 import cors from 'cors';
+const openaiUrl = 'https://genos.openai.azure.com/';  
+const openaiVersion = '2023-09-15-preview';  
+const openaiKey = process.env.OPENAI_API_KEY;  
+const engine = 'gpt-35-turbo'; 
 
 const app = express();
+  
+async function fetchCompletion() {  
+  try {  
+    const response = await axios.post(`${openaiUrl}v1/engines/${engine}/completions`, data, { headers: headers });  
+    console.log(response.data);  
+  } catch (error) {  
+    console.error(error);  
+  }  
+}  
+  
 const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use('*', async (req, res) => {  
-    const text = req.body.text;  
-      
-    const azureOpenAIPayload = {  
-        "documents": [{  
-            "language": "en",  
-            "id": "1",  
-            "text": text  
-        }]  
-    };  
-      
-    try {  
-        const response = await axios.post('https://YOUR_RESOURCE_NAME.cognitiveservices.azure.com/text/analytics/v3.1-preview.5/languages', azureOpenAIPayload, {  
-            headers: {  
-                'Ocp-Apim-Subscription-Key': 'YOUR_AZURE_OPENAI_KEY'  
-            }  
-        });  
-          
-        res.send(response.data);  
-    } catch (error) {  
-        res.status(500).send(error.message);  
-    }  
+    const headers = {  
+  'Content-Type': 'application/json',  
+  'Authorization': `Bearer ${openaiKey}`,  
+  'OpenAI-Version': openaiVersion  
+};  
+  
+const data = {  
+  'engine': engine,  
+  'prompt': '',  
+  'max_tokens': 100,  
+  'temperature': 1,  
+  'top_p': 0.5,  
+  'frequency_penalty': 0,  
+  'presence_penalty': 0  
+}; 
+ fetchCompletion();  
 }); 
+
+
+
+
+  
+ 
+  
+ 
+
+
+
 
 app.listen(PORT, () => {
   console.log(`API is listening on port ${PORT}`);
