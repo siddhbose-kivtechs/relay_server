@@ -34,7 +34,7 @@ app.use('*', async (req, res) => {
 
   const data = {
     engine,
-    prompt: '',
+    prompt: 'hello ',
     max_tokens: 100,
     temperature: 1,
     top_p: 0.5,
