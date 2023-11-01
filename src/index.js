@@ -12,9 +12,11 @@ const app = express();
 async function fetchCompletion() {  
   try {  
     const response = await axios.post(`${openaiUrl}v1/engines/${engine}/completions`, data, { headers: headers });  
+    return response;
     console.log(response.data);  
   } catch (error) {  
     console.error(error);  
+    return error;
   }  
 }  
   
@@ -36,7 +38,7 @@ const data = {
   'frequency_penalty': 0,  
   'presence_penalty': 0  
 }; 
- fetchCompletion();  
+ res.send(fetchCompletion());  
 }); 
 
 
