@@ -32,10 +32,13 @@ app.use('*', async (req, res) => {
     Authorization: `Bearer ${openaiKey}`,
     'OpenAI-Version': openaiVersion,
   };
-
+let _mess={
+  role:'user;,
+    content:'hello'
+};
   const data = {
     engine,
-    prompt: 'hello ',
+    prompt: _mess,
     max_tokens: 100,
     temperature: 1,
     top_p: 0.5,
