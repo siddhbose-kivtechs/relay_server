@@ -28,7 +28,7 @@ async function fetchCompletion(data) {
 }  
   
 app.all('*', async (req, res) => {  
-  if (req.path === '/v1/chat/completions') {  
+ 
     const data = {  
       engine,  
       prompt: req.body.prompt,  
@@ -38,14 +38,16 @@ app.all('*', async (req, res) => {
       frequency_penalty: 0,  
       presence_penalty: 0,  
     };  
-  
+  console.log(data);
     try {  
       const response = await fetchCompletion(data);  
       res.json(response.data);  
-    } catch (error) {  
+    } 
+    catch (error) {  
       res.status(500).json({ error: 'Internal Server Error' });  
     }  
-  } else {  
+  }
+        else {  
     res.status(404).json({ error: 'Route not found' });  
   }  
 });  
