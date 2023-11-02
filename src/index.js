@@ -51,7 +51,7 @@ app.all('*', async (req, res) => {
   //   res.status(404).json({ error: 'Route not found' });  
   // }  
 
-  res.send(req.bpdy);
+  res.send(req.body);
 });  
   
 app.listen(PORT, () => {  
