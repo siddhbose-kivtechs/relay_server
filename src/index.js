@@ -19,6 +19,7 @@ async function fetchCompletion(data) {
       data,  
       { headers: { Authorization: `Bearer ${openaiKey}`, 'OpenAI-Version': openaiVersion } }  
     );  
+    console.log(response);
     return response;  
   } catch (error) {  
     console.error(error);  
