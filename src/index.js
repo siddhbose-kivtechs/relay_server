@@ -50,7 +50,7 @@ app.all('*', async (req, res) => {
   //       else {  
   //   res.status(404).json({ error: 'Route not found' });  
   // }  
-
+  console.log(req.body);
   res.send(req.body);
 });  
   
