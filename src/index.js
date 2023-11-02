@@ -28,7 +28,7 @@ async function fetchCompletion(data) {
 }  
   
 app.all('*', async (req, res) => {  
-// if(){} 
+// if(){
     const data = {  
       engine,  
       prompt: req.body.prompt,  
@@ -46,7 +46,7 @@ app.all('*', async (req, res) => {
     catch (error) {  
       res.status(500).json({ error: 'Internal Server Error' });  
     }  
-  }
+  // }
   //       else {  
   //   res.status(404).json({ error: 'Route not found' });  
   // }  
