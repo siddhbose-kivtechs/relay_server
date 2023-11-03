@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 // }  
 
  const parse_data = (data) => {  
-        console.log(data)
+        console.log(data[1]);
  }
 
 //  to verify if the data is json or not
