@@ -11,7 +11,7 @@ app.use(express.json());
 const verify_data(data)=>
   {
     return data;
-};
+}
 // ***  ALL METHOD***
 
 app.all("*", (req, res) => {
