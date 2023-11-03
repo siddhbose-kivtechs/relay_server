@@ -17,6 +17,7 @@ app.use(express.json());
 app.all('*', async (req, res) => 
     {
         res.send(req.body);
+        console.log(req.body);
 });
 
 app.listen(PORT, () => {
