@@ -33,10 +33,10 @@ app.all("*", (req, res) => {
   const data=req.body;
 
   // if (typeof data === 'object') 
-  if(verify_data)
+  if(verify_data && typeof data === 'object' && data)
   {  
     // parse the json data
-    // parse_data(data);
+     parse_data(data);
     res.send({ type:'json data', data:data });  
     console.log({ type:'json data', data:data });
   } 
