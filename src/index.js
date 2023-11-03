@@ -23,19 +23,14 @@ const verify_data = (data) =>
 app.all("*", (req, res) => {
   let check_data=verify_data(req.body);
    console.log(check_data);
-    console.log(req.body);
-   
-  if(check_data)
-  {
-    res.send({data:'json data'});
-  }
-  else
-  {
-    res.send({data:'not a json data'});
-  }
-  // res.send(check_data);
+    console.log(req.body); 
+  if (typeof req.body === 'object') {  
+    res.send({ data: 'json data' });  
+  } else {  
+    res.send({ data: 'not a json data' });  
+  }  
+});  
 
-});
 
 app.listen(PORT, () => {
     console.log(`Relay app is listening on port ${PORT}`);
