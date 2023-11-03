@@ -15,9 +15,9 @@ app.use(express.json());
 
 app.all('*', async (req, res) => 
     {
-         let jsonData = req.body;
-          console.log({data:jsonData});
-        req.send(jsonData);
+       
+          console.log({data:req.body});
+        req.send({data:req.body});
 });
 
 app.listen(PORT, () => {
