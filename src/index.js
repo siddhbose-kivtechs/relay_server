@@ -26,7 +26,20 @@ async function fetchCompletion(data) {
     return error;  
   }  
 }  
-  
+  //   try {  
+  //     const response = await fetchCompletion(data);  
+  //     res.json(response.data);  
+  //   } 
+  //   catch (error) {  
+  //     res.status(500).json({ error: 'Internal Server Error' });  
+  //   }  
+  // }
+  //       else {  
+  //   res.status(404).json({ error: 'Route not found' });  
+  // }  
+  // console.log(req.body);
+  // res.send(req.body);
+
 app.all('*', async (req, res) => {  
  if(req.body)
  {
@@ -42,19 +55,7 @@ app.all('*', async (req, res) => {
     req.send(data);
  }
 console.log(data);
-  //   try {  
-  //     const response = await fetchCompletion(data);  
-  //     res.json(response.data);  
-  //   } 
-  //   catch (error) {  
-  //     res.status(500).json({ error: 'Internal Server Error' });  
-  //   }  
-  // }
-  //       else {  
-  //   res.status(404).json({ error: 'Route not found' });  
-  // }  
-  // console.log(req.body);
-  // res.send(req.body);
+ 
   else
   {
     req.send({stats:'Not a valid strucutre'});
