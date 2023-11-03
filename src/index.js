@@ -44,7 +44,7 @@ const verify_data = (data) =>
     return true;  
   }
      catch (error) {  
-             console.log(' Not a valid JSON');
+console.log(' Not a valid JSON');
     return false;  
      
   }  
@@ -58,10 +58,10 @@ app.all("*", (req, res) => {
     const jsonString = JSON.stringify(data);  
     const strippedStr = jsonString.replace(/`/g, '');    
     // res.send({ type: 'json data', data: strippedStr });   
-      res.send(strippedStr);
+      
     // console.log({ type: 'json data', data: strippedStr });
      // parse_data(strippedStr);
-      verify_data(strippedStr);
+      res.send({stats:verify_data(strippedStr),data:strippedStr});
   } else {    
     res.send({ type: 'not a json data', data: data });    
     console.log({ type: 'not a json data', data: data });  
