@@ -10,9 +10,11 @@ app.use(cors());
 app.use(bodyParser.json());  
 
 const parse_data= (data) => {
-  let p=JSON.parse(data);
-  console.log(p);
-  
+  let jsonData=JSON.parse(data);
+  console.log(jsonData);
+if (jsonData.hasOwnProperty('message')) {  
+  console.log(Extracting message);
+}
 }
 
 //  to verify if the data is json or not
