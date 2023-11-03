@@ -42,24 +42,20 @@ const verify_data = (data) =>
 }
 // ***  ALL METHOD***
 
-app.all("*", (req, res) => {
-  const data=req.body;
-
-  // if (typeof data === 'object') 
-  if(verify_data && typeof data === 'object' && data)
-  {  
-    // parse the json data
-    // parse_data(data);
-    const strippedStr = data.replace(/`/g, '');  
-    res.send({ type:'json data', data:strippedStr });  
-    console.log({ type:'json data', data:strippedStr });
-  } 
+app.all("*", (req, res) => {  
+  const data = req.body;  
   
-  else {  
-    res.send({ type:'not a json data',data: data  });  
-    console.log({ type:'not a json data',data: data  });
-  }  
+  if (verify_data && typeof data === 'object' && data) {    
+    const jsonString = JSON.stringify(data);  
+    const strippedStr = jsonString.replace(/`/g, '');    
+    res.send({ type: 'json data', data: strippedStr });    
+    console.log({ type: 'json data', data: strippedStr });  
+  } else {    
+    res.send({ type: 'not a json data', data: data });    
+    console.log({ type: 'not a json data', data: data });  
+  }    
 });  
+  
 
 
 app.listen(PORT, () => {
