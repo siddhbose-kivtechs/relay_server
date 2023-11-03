@@ -23,8 +23,9 @@ const verify_data = (data) =>
 
 app.all("*", (req, res) => {
   let check_data=verify_data(req.body);
+   console.log(check_data);
     console.log(req.body);
-    console.log(check_data);
+   
   if(check_data)
   {
     res.send({data:'json data'});
