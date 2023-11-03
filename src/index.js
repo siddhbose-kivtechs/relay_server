@@ -38,7 +38,7 @@ app.all("*", (req, res) => {
   if(verify_data && typeof data === 'object' && data)
   {  
     // parse the json data
-     parse_data(data);
+     // parse_data(data);
     res.send({ type:'json data', data:data });  
     console.log({ type:'json data', data:data });
   } 
