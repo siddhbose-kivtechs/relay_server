@@ -25,9 +25,9 @@ app.all("*", (req, res) => {
    console.log(check_data);
     console.log(req.body); 
   if (typeof req.body === 'object') {  
-    res.send({ data: 'json data' });  
+    res.send({ type:'json data', data:req.body });  
   } else {  
-    res.send({ data: 'not a json data' });  
+    res.send({ type:'not a json data',data: req.body  });  
   }  
 });  
 
