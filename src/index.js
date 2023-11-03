@@ -29,23 +29,23 @@ async function fetchCompletion(data) {
 app.all('*', async (req, res) => {
     try {
         const jsonData = req.body;
+          console.log({data:jsonData});
         try {
             JSON.parse(jsonData);
             console.log('Valid JSON');
-
-            console.log({data:jsonData});
 
             res.status(200).json(jsonData);
         } 
         catch (error) {
             console.log('Invalid JSON');
-            console.log({data:jsonData});
+          
               res.status(200).json({data:jsonData});
         }
 
 
 
-    } catch (error) {
+    }
+    catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
