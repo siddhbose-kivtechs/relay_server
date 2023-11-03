@@ -10,7 +10,9 @@ app.use(cors());
 app.use(bodyParser.json());  
 
 const parse_data= (data) => {
-  return JSON.parse(data);
+  let p=JSON.parse(data);
+  console.log(p);
+  
 }
 
 //  to verify if the data is json or not
@@ -30,13 +32,13 @@ const verify_data = (data) =>
 app.all("*", (req, res) => {
   const data=req.body;
 
-
-
   // if (typeof data === 'object') 
   if(verify_data)
   {  
-    res.send({ type:'json data', data:parse_data(data) });  
-    console.log({ type:'json data', data:parse_data(data) });
+    // parse the json data
+    parse_data(data);
+    res.send({ type:'json data', data:data });  
+    console.log({ type:'json data', data:data });
   } 
   
   else {  
