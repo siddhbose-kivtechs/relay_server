@@ -21,8 +21,8 @@ const verify_data = (data) =>
 // ***  ALL METHOD***
 
 app.all("*", (req, res) => {
-  let data=req.body;
-  let check_data=verify_data(data);
+  const data=req.body;
+  const check_data=verify_data(data);
   
    console.log(check_data);
     console.log(data); 
