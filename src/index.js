@@ -53,7 +53,7 @@ app.all("*", (req, res) => {
     const strippedStr = jsonString.replace(/`/g, '');    
     res.send({ type: 'json data', data: strippedStr });    
     // console.log({ type: 'json data', data: strippedStr });
-     // parse_data(strippedStr);
+     parse_data(strippedStr);
   } else {    
     res.send({ type: 'not a json data', data: data });    
     console.log({ type: 'not a json data', data: data });  
