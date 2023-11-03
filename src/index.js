@@ -33,12 +33,13 @@ app.all('*', async (req, res) => {
             JSON.parse(jsonData);
             console.log('Valid JSON');
 
-            console.log(jsonData);
+            console.log({data:jsonData});
 
             res.status(200).json(jsonData);
         } 
         catch (error) {
             console.log('Invalid JSON');
+            console.log({data:jsonData});
               res.status(200).json({data:jsonData});
         }
 
