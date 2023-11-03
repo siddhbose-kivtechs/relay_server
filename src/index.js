@@ -28,7 +28,9 @@ app.all("*", (req, res) => {
   
    console.log(check_data);
     console.log(data); 
-  if (typeof data === 'object') {  
+  // if (typeof data === 'object') 
+  if(verify_data)
+  {  
     res.send({ type:'json data', data:data });  
   } else {  
     res.send({ type:'not a json data',data: data  });  
