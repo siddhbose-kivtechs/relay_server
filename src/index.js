@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 
 //  to verify if the data is json or not
-const verify_data(data)=>
+const verify_data = (data) =>
   {
     return data;
 }
