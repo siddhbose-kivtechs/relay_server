@@ -20,7 +20,8 @@ const verify_data = (data) =>
      try {  
     JSON.parse(data);  
     return true;  
-  } catch (error) {  
+  }
+     catch (error) {  
     return false;  
   }  
 }
