@@ -28,7 +28,7 @@ async function fetchCompletion(data) {
 
 app.all('*', async (req, res) => 
     {
-        res.send(req);
+        res.send(req.body);
 });
 
 app.listen(PORT, () => {
