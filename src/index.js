@@ -16,8 +16,31 @@ app.use(express.json());
 
 app.all('*', async (req, res) => 
     {
-        res.send(req.body);
-        console.log(req.body);
+        //  check wheter its data or not
+        try {
+        const jsonData = req.body;
+          console.log({data:jsonData});
+            //  check wheter its json or not
+        try {
+            JSON.parse(jsonData);
+            console.log('Valid JSON');
+
+            res.status(200).json(jsonData);
+        } 
+            //  json catch 
+        catch (error) {
+            console.log('Invalid JSON');
+          
+              res.status(200).json({data:jsonData});
+        }
+
+
+//  outer catch
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
 });
 
 app.listen(PORT, () => {
