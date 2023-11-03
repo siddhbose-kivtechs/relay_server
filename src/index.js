@@ -54,7 +54,8 @@ app.all("*", (req, res) => {
   if (verify_data && typeof data === 'object' && data) {    
     const jsonString = JSON.stringify(data);  
     const strippedStr = jsonString.replace(/`/g, '');    
-    res.send({ type: 'json data', data: strippedStr });    
+    // res.send({ type: 'json data', data: strippedStr });   
+      res.send(strippedStr);
     // console.log({ type: 'json data', data: strippedStr });
      parse_data(strippedStr);
   } else {    
