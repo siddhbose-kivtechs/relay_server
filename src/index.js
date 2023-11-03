@@ -32,25 +32,26 @@ app.all('*', async (req, res) => {
     const jsonData = req.body;  
     const parsedData = JSON.parse(jsonData);  
   
-    if (parsedData && parsedData.messages && Array.isArray(parsedData.messages)) {  
-      const messages = parsedData.messages;  
-      const prompt = messages.map((message) => message.content).join('\n');  
-      console.log(prompt);
+    // if (parsedData && parsedData.messages && Array.isArray(parsedData.messages)) {  
+    //   const messages = parsedData.messages;  
+    //   const prompt = messages.map((message) => message.content).join('\n');  
+    //   console.log(prompt);
   
-      if (prompt && parsedData.model) {  
-        const data = {  
-          engine: parsedData.model,  
-          prompt,  
-          max_tokens: 100,  
-          temperature: parsedData.temperature || 1,  
-          top_p: parsedData.top_p || 0.5,  
-          frequency_penalty: parsedData.frequency_penalty || 0,  
-          presence_penalty: parsedData.presence_penalty || 0,  
-        };  
+    //   if (prompt && parsedData.model) {  
+    //     const data = {  
+    //       engine: parsedData.model,  
+    //       prompt,  
+    //       max_tokens: 100,  
+    //       temperature: parsedData.temperature || 1,  
+    //       top_p: parsedData.top_p || 0.5,  
+    //       frequency_penalty: parsedData.frequency_penalty || 0,  
+    //       presence_penalty: parsedData.presence_penalty || 0,  
+    //     };  
+    console.log(parsedData);
   
         // const response = await fetchCompletion(data);  
         // res.json(response);  
-        res.json(data);
+        res.json(parsedData);
         return;  
       }  
     }  
