@@ -1,4 +1,4 @@
-import express from 'express';
+LivLivLivimport express from 'express';
 import axios from 'axios';
 import cors from 'cors';
 import bodyParser from 'body-parser'; 
@@ -49,7 +49,7 @@ app.all("*", (req, res) => {
     const jsonString = JSON.stringify(data);  
     const strippedStr = jsonString.replace(/`/g, '');    
     res.send({ type: 'json data', data: strippedStr });    
-    console.log({ type: 'json data', data: strippedStr });
+    // console.log({ type: 'json data', data: strippedStr });
      parse_data(strippedStr);
   } else {    
     res.send({ type: 'not a json data', data: data });    
