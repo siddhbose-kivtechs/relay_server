@@ -44,8 +44,9 @@ const verify_data = (data) =>
     return true;  
   }
      catch (error) {  
+             console.log(' Not a valid JSON');
     return false;  
-         console.log(' Not a valid JSON');
+     
   }  
 }
 // ***  ALL METHOD***
