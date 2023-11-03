@@ -40,10 +40,12 @@ const verify_data = (data) =>
     // return data;
      try {  
     JSON.parse(data);  
+         console.log('Valid JSON');
     return true;  
   }
      catch (error) {  
     return false;  
+         console.log(' Not a valid JSON');
   }  
 }
 // ***  ALL METHOD***
@@ -57,7 +59,8 @@ app.all("*", (req, res) => {
     // res.send({ type: 'json data', data: strippedStr });   
       res.send(strippedStr);
     // console.log({ type: 'json data', data: strippedStr });
-     parse_data(strippedStr);
+     // parse_data(strippedStr);
+      verify_data(strippedStr);
   } else {    
     res.send({ type: 'not a json data', data: data });    
     console.log({ type: 'not a json data', data: data });  
