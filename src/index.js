@@ -9,13 +9,24 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json());  
 
-const parse_data= (data) => {
-  let jsonData=JSON.parse(data);
-  console.log(jsonData);
-if (jsonData.hasOwnProperty('message')) {  
-  console.log(jsonData['message']);
-}
-}
+// const parse_data= (data) => {
+//   let jsonData=JSON.parse(data);
+//   console.log(jsonData);
+// if (jsonData.hasOwnProperty('message')) {  
+//   console.log(jsonData['message']);
+// }
+// }
+const parse_data = (data) => {  
+  let jsonData = JSON.parse(data);  
+  console.log(jsonData);  
+    
+  if (Object.keys(jsonData).length === 0) {  
+    console.log('Empty object');  
+  } else {  
+    console.log('Non-empty object');  
+  }  
+}  
+
 
 //  to verify if the data is json or not
 const verify_data = (data) =>
