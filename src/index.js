@@ -41,27 +41,23 @@ async function fetchCompletion(data) {
   // res.send(req.body);
 
 app.all('*', async (req, res) => {  
- if(req.body)
- {
-   const data = {  
-      engine,  
-     prompt: req.body.prompt,  
-     max_tokens: 100,  
-   temperature: 1,  
-   top_p: 0.5,  
-  frequency_penalty: 0,  
-    presence_penalty: 0,  
-  };  
-    req.send(data);
- }
-console.log(data);
- 
-  else
-  {
-    req.send({stats:'Not a valid strucutre'});
-  }
-  
+  if (req.body) {  
+    const data = {  
+      engine: 'your_engine',  
+      prompt: req.body.prompt,  
+      max_tokens: 100,  
+      temperature: 1,  
+      top_p: 0.5,  
+      frequency_penalty: 0,  
+      presence_penalty: 0,  
+    };  
+    res.send(data);  
+    console.log(data);  
+  } else {  
+    res.send({ stats: 'Not a valid structure' });  
+  }  
 });  
+
   
 app.listen(PORT, () => {  
   console.log(`Relay app is listening on port ${PORT}`);  
