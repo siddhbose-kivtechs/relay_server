@@ -19,45 +19,14 @@ async function fetchCompletion(data) {
       data,  
       { headers: { Authorization: `Bearer ${openaiKey}`, 'OpenAI-Version': openaiVersion } }  
     );  
-    console.log(response);
-    return response;  
+    console.log(response);  
+    return response.data;  
   } catch (error) {  
     console.error(error);  
-    return error;  
+    throw error;  
   }  
 }  
-  //   try {  
-  //     const response = await fetchCompletion(data);  
-  //     res.json(response.data);  
-  //   } 
-  //   catch (error) {  
-  //     res.status(500).json({ error: 'Internal Server Error' });  
-  //   }  
-  // }
-  //       else {  
-  //   res.status(404).json({ error: 'Route not found' });  
-  // }  
-  // console.log(req.body);
-  // res.send(req.body);
-
-// app.all('*', async (req, res) => {  
-  // if (req.body) {  
-    // const data = {  
-    //   engine: 'your_engine',  
-    //   prompt: req.body.prompt,  
-    //   max_tokens: 100,  
-    //   temperature: 1,  
-    //   top_p: 0.5,  
-    //   frequency_penalty: 0,  
-    //   presence_penalty: 0,  
-    // };  
-    // res.send(req.data);  
-    // console.log(req.data);  
-  // } else {  
-    // res.send({ stats: 'Not a valid structure' });  
-  // }  
-// });  
-
+  
 app.all('*', async (req, res) => {  
   try {  
     const jsonData = req.body;  
@@ -65,24 +34,32 @@ app.all('*', async (req, res) => {
   
     if (parsedData && parsedData.messages && Array.isArray(parsedData.messages)) {  
       const messages = parsedData.messages;  
-      const firstMessage = messages[0];  
+      const prompt = messages.map((message) => message.content).join('\n');  
   
-      if (firstMessage && firstMessage.role && firstMessage.content && parsedData.model) {  
-        res.send('Found valid structure');  
+      if (prompt && parsedData.model) {  
+        const data = {  
+          engine: parsedData.model,  
+          prompt,  
+          max_tokens: 100,  
+          temperature: parsedData.temperature || 1,  
+          top_p: parsedData.top_p || 0.5,  
+          frequency_penalty: parsedData.frequency_penalty || 0,  
+          presence_penalty: parsedData.presence_penalty || 0,  
+        };  
+  
+        const response = await fetchCompletion(data);  
+        res.json(response);  
         return;  
       }  
     }  
-  } 
-  catch (error) {  
-    console.error(error);  
-  }  
   
-res.send({ stats: 'Not a valid structure' });   
+    // Block relay to OpenAI if required parameters are not present  
+    res.status(400).json({ error: 'Invalid request' });  
+  } catch (error) {  
+    console.error(error);  
+    res.status(500).json({ error: 'Internal Server Error' });  
+  }  
 });  
-
-
-
-
   
 app.listen(PORT, () => {  
   console.log(`Relay app is listening on port ${PORT}`);  
