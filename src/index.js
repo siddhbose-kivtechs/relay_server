@@ -16,17 +16,20 @@ app.use(bodyParser.json());
 //   console.log(jsonData['message']);
 // }
 // }
-const parse_data = (data) => {  
-  let jsonData = JSON.parse(data);  
-  console.log(jsonData);  
+// const parse_data = (data) => {  
+//   let jsonData = JSON.parse(data);  
+//   console.log(jsonData);  
     
-  if (Object.keys(jsonData).length === 0) {  
-    console.log('Empty object');  
-  } else {  
-    console.log('Non-empty object');  
-  }  
-}  
+//   if (Object.keys(jsonData).length === 0) {  
+//     console.log('Empty object');  
+//   } else {  
+//     console.log('Non-empty object');  
+//   }  
+// }  
 
+ const parse_data = (data) => {  
+        console.log(data)
+ }
 
 //  to verify if the data is json or not
 const verify_data = (data) =>
