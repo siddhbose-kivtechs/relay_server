@@ -12,25 +12,6 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// Helper function to check the validity of the request structure  
-function isValidRequest(requestData) {  
-  // Implement your checks here based on the expected structure of the request data  
-  // Return true if the request structure is valid, false otherwise  
-  // For example:  
-  if (  
-    requestData &&  
-    requestData.messages &&  
-    Array.isArray(requestData.messages) &&  
-    requestData.messages.length > 0 &&  
-    typeof requestData.model === 'string' &&  
-    typeof requestData.temperature === 'number' &&  
-    typeof requestData.presence_penalty === 'number'  
-  ) 
-  {  
-    return true;  
-  }  
-  return false;  
-}
 
 app.all('*', async (req, res) => 
     {
