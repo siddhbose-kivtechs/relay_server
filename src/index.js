@@ -42,17 +42,17 @@ async function fetchCompletion(data) {
 
 app.all('*', async (req, res) => {  
   if (req.body) {  
-    const data = {  
-      engine: 'your_engine',  
-      prompt: req.body.prompt,  
-      max_tokens: 100,  
-      temperature: 1,  
-      top_p: 0.5,  
-      frequency_penalty: 0,  
-      presence_penalty: 0,  
-    };  
-    res.send(data);  
-    console.log(data);  
+    // const data = {  
+    //   engine: 'your_engine',  
+    //   prompt: req.body.prompt,  
+    //   max_tokens: 100,  
+    //   temperature: 1,  
+    //   top_p: 0.5,  
+    //   frequency_penalty: 0,  
+    //   presence_penalty: 0,  
+    // };  
+    res.send(req.data);  
+    console.log(req.data);  
   } else {  
     res.send({ stats: 'Not a valid structure' });  
   }  
