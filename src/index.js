@@ -37,7 +37,7 @@ app.all('*', async (req, res) => {
         // const response = await fetchCompletion(data);  
         // res.json(response);  
         // res.json(parsedData);
-     res.status(200).json(parsedData});  
+     res.status(200).json(parsedData);  
         // return;  
       // }  
     }  
