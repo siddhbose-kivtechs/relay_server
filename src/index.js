@@ -50,8 +50,9 @@ app.all("*", (req, res) => {
   {  
     // parse the json data
     // parse_data(data);
-    res.send({ type:'json data', data:data });  
-    console.log({ type:'json data', data:data });
+    const strippedStr = data.replace(/`/g, '');  
+    res.send({ type:'json data', data:strippedStr });  
+    console.log({ type:'json data', data:strippedStr });
   } 
   
   else {  
