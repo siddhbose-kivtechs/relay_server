@@ -10,7 +10,7 @@ app.use(express.json());
 
 
 // ***  ALL METHOD***
-app.all("/", (req, res) => {
+app.all("*", (req, res) => {
   res.send("<h2>It's Working!</h2>");
 });
 app.listen(PORT, () => {
