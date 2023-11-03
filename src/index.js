@@ -21,13 +21,15 @@ const verify_data = (data) =>
 // ***  ALL METHOD***
 
 app.all("*", (req, res) => {
-  let check_data=verify_data(req.body);
+  let data=req.body;
+  let check_data=verify_data(data);
+  
    console.log(check_data);
-    console.log(req.body); 
-  if (typeof req.body === 'object') {  
-    res.send({ type:'json data', data:req.body });  
+    console.log(data); 
+  if (typeof data === 'object') {  
+    res.send({ type:'json data', data:data });  
   } else {  
-    res.send({ type:'not a json data',data: req.body  });  
+    res.send({ type:'not a json data',data: data  });  
   }  
 });  
 
