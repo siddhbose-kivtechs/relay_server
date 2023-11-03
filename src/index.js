@@ -30,14 +30,15 @@ async function fetchCompletion(data) {
 app.all('*', async (req, res) => {  
   try {  
     const jsonData = req.body;  
-    const parsedData = JSON.parse(jsonData);  
+    // const parsedData = JSON.parse(jsonData);  
 
     console.log(parsedData);
   
         // const response = await fetchCompletion(data);  
         // res.json(response);  
-        res.json(parsedData);
-        return;  
+        // res.json(parsedData);
+     res.status(200).json(parsedData});  
+        // return;  
       // }  
     }  
   
