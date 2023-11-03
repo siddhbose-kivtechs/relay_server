@@ -26,29 +26,9 @@ async function fetchCompletion(data) {
     }
 }
 
-app.all('*', async (req, res) => {
-    try {
-        const jsonData = req.body;
-          console.log({data:jsonData});
-        try {
-            JSON.parse(jsonData);
-            console.log('Valid JSON');
-
-            res.status(200).json(jsonData);
-        } 
-        catch (error) {
-            console.log('Invalid JSON');
-          
-              res.status(200).json({data:jsonData});
-        }
-
-
-
-    }
-    catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
+app.all('*', async (req, res) => 
+    {
+        res.send(req);
 });
 
 app.listen(PORT, () => {
