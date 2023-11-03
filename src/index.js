@@ -13,7 +13,7 @@ const parse_data= (data) => {
   let jsonData=JSON.parse(data);
   console.log(jsonData);
 if (jsonData.hasOwnProperty('message')) {  
-  console.log(Extracting message);
+  console.log(jsonData['message']);
 }
 }
 
