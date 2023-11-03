@@ -30,7 +30,7 @@ function isValidRequest(requestData) {
     return true;  
   }  
   return false;  
-}  
+});  
 
 app.all('*', async (req, res) => 
     {
