@@ -8,13 +8,16 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-
+const verify_data(data)=>
+  {
+    return data;
+};
 // ***  ALL METHOD***
 
 app.all("*", (req, res) => {
-  let process_data=req.body;
-  res.send({data:process_data});
-  console.log(process_data);
+  let check_data=verify_data(req.body);
+  res.send(check_data);
+  console.log(check_data);
 });
 
 app.listen(PORT, () => {
