@@ -28,17 +28,20 @@ async function fetchCompletion(data) {
 }  
   
 app.all('*', async (req, res) => {  
-// if(){
-  //   const data = {  
-  //     engine,  
-  //     prompt: req.body.prompt,  
-  //     max_tokens: 100,  
-  //     temperature: 1,  
-  //     top_p: 0.5,  
-  //     frequency_penalty: 0,  
-  //     presence_penalty: 0,  
-  //   };  
-  // console.log(data);
+ if(req.body)
+ {
+   const data = {  
+  engine,  
+     prompt: req.body.prompt,  
+     max_tokens: 100,  
+   temperature: 1,  
+   top_p: 0.5,  
+  frequency_penalty: 0,  
+    presence_penalty: 0,  
+  };  
+    req.send(data);
+ }
+console.log(data);
   //   try {  
   //     const response = await fetchCompletion(data);  
   //     res.json(response.data);  
@@ -50,8 +53,13 @@ app.all('*', async (req, res) => {
   //       else {  
   //   res.status(404).json({ error: 'Route not found' });  
   // }  
-  console.log(req.body);
-  res.send(req.body);
+  // console.log(req.body);
+  // res.send(req.body);
+  else
+  {
+    req.send({stats:'Not a valid strucutre'});
+  }
+  
 });  
   
 app.listen(PORT, () => {  
