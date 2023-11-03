@@ -6,7 +6,6 @@ import cors from 'cors';
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(cors());
-app.use(express.json());
 
 //  to verify if the data is json or not
 const verify_data = (data) =>
