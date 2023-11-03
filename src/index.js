@@ -1,11 +1,13 @@
 import express from 'express';
 import axios from 'axios';
 import cors from 'cors';
+import bodyParser from 'body-parser'; 
 
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(cors());
+app.use(bodyParser.json());  
 
 //  to verify if the data is json or not
 const verify_data = (data) =>
