@@ -40,8 +40,8 @@ async function fetchCompletion(data) {
   // console.log(req.body);
   // res.send(req.body);
 
-app.all('*', async (req, res) => {  
-  if (req.body) {  
+// app.all('*', async (req, res) => {  
+  // if (req.body) {  
     // const data = {  
     //   engine: 'your_engine',  
     //   prompt: req.body.prompt,  
@@ -51,12 +51,37 @@ app.all('*', async (req, res) => {
     //   frequency_penalty: 0,  
     //   presence_penalty: 0,  
     // };  
-    res.send(req.data);  
-    console.log(req.data);  
-  } else {  
-    res.send({ stats: 'Not a valid structure' });  
+    // res.send(req.data);  
+    // console.log(req.data);  
+  // } else {  
+    // res.send({ stats: 'Not a valid structure' });  
+  // }  
+// });  
+
+app.all('*', async (req, res) => {  
+  try {  
+    const jsonData = req.body;  
+    const parsedData = JSON.parse(jsonData);  
+  
+    if (parsedData && parsedData.messages && Array.isArray(parsedData.messages)) {  
+      const messages = parsedData.messages;  
+      const firstMessage = messages[0];  
+  
+      if (firstMessage && firstMessage.role && firstMessage.content && parsedData.model) {  
+        res.send('Found valid structure');  
+        return;  
+      }  
+    }  
+  } 
+  catch (error) {  
+    console.error(error);  
   }  
+  
+res.send({ stats: 'Not a valid structure' });   
 });  
+
+
+
 
   
 app.listen(PORT, () => {  
