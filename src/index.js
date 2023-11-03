@@ -35,6 +35,7 @@ app.all('*', async (req, res) => {
     if (parsedData && parsedData.messages && Array.isArray(parsedData.messages)) {  
       const messages = parsedData.messages;  
       const prompt = messages.map((message) => message.content).join('\n');  
+      console.log(prompt);
   
       if (prompt && parsedData.model) {  
         const data = {  
@@ -47,8 +48,9 @@ app.all('*', async (req, res) => {
           presence_penalty: parsedData.presence_penalty || 0,  
         };  
   
-        const response = await fetchCompletion(data);  
-        res.json(response);  
+        // const response = await fetchCompletion(data);  
+        // res.json(response);  
+        res.json(data);
         return;  
       }  
     }  
