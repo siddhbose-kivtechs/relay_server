@@ -24,16 +24,17 @@ const verify_data = (data) =>
 
 app.all("*", (req, res) => {
   const data=req.body;
-  const check_data=verify_data(data);
-  
-   console.log(check_data);
-    console.log(data); 
+
+
+
   // if (typeof data === 'object') 
   if(verify_data)
   {  
     res.send({ type:'json data', data:data });  
+    console.log({ type:'json data', data:data });
   } else {  
     res.send({ type:'not a json data',data: data  });  
+    console.log({ type:'not a json data',data: data  });
   }  
 });  
 
