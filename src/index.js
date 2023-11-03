@@ -12,19 +12,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-async function fetchCompletion(data) {
-    try {
-        const response = await axios.post(
-            `${openaiUrl}v1/engines/${engine}/completions`,
-            data, { headers: { Authorization: `Bearer ${openaiKey}`, 'OpenAI-Version': openaiVersion } }
-        );
-        console.log(response);
-        return response.data;
-    } catch (error) {
-        console.error(error);
-        throw error;
-    }
-}
+
 
 app.all('*', async (req, res) => 
     {
