@@ -1,4 +1,7 @@
-import express from 'express';
+else {  
+  // Access the inserted data  
+  console.log("Log entry inserted:", logEntry);  
+}  import express from 'express';
 import axios from 'axios';
 import cors from 'cors';
 import { createClient } from "@supabase/supabase-js";
