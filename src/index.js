@@ -98,18 +98,18 @@ app.all("*", (req, res) => {
    console.log(log);
 
   // Insert the log entry into Supabase
-  // const { data: logEntry, error } = await supabase
-  //   .from("logs")
-  //   .insert([log]);
+  const { data: logEntry, error } = await supabase
+    .from("logs")
+    .insert([log]);
 
-  // // Handle any errors
-  // if (error) {
-  //   console.error("Error inserting log:", error);
-  //   return res.status(200).send("Out of Order. Contact Admin");
-  // }
+  // Handle any errors
+  if (error) {
+    console.error("Error inserting log:", error);
+    return res.status(200).send("Out of Order. Contact Admin");
+  }
 
-  // // Log the success message
-  // console.log("Log inserted successfully:", logEntry);
+  // Log the success message
+  console.log("Log inserted successfully:", logEntry);
 
 
 });  
