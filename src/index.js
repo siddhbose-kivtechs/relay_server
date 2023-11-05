@@ -73,16 +73,28 @@ app.all("*", async(req, res) => {
   const data = req.body;    
   const jsonString = JSON.stringify(data);    
   const strippedStr = jsonString.replace(/`/g, '');   
+    
+    // check 
+    const message = req.body.messages[0];
+
+  if (message instanceof Object)
+  {
+            res.send(' Has message and is an object');
+  }
+ else
+  {
+      res.send(' Either no message or not an object');
+  }
   
-  if (typeof data === 'object' && data && isValidFormat(data)) {      
-    // send the data to OpenAI  
-    const response = isValidFormat(strippedStr);  
-    res.send(response);  
-    console.log('JSON DATA');  
-  } else {      
-    res.json({ type: 'not a valid format or not a json data', data: data });      
-    console.log({ type: 'not a valid format or not a json data', data: data });    
-  }  
+  // if (typeof data === 'object' && data && isValidFormat(data)) {      
+  //   // send the data to OpenAI  
+  //   const response = isValidFormat(strippedStr);  
+  //   res.send(response);  
+  //   console.log('JSON DATA');  
+  // } else {      
+  //   res.json({ type: 'not a valid format or not a json data', data: data });      
+  //   console.log({ type: 'not a valid format or not a json data', data: data });    
+  // }  
   
   let log = {  
     status: "ok",  
