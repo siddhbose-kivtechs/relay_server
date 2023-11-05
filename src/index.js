@@ -81,39 +81,6 @@ app.all("*", async(req, res) => {
     res.json({ type: 'not a json data', data: data });    
     console.log({ type: 'not a json data', data: data });  
   }
-  let log = {
-    status: "ok",
-    url: req.originalUrl,
-    ip_address: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
-    request_body: req.body,
-    request_method: req.method,
-    lat: req.headers['x-vercel-ip-latitude'],
-    lon: req.headers['x-vercel-ip-longitude'],
-    city: req.headers['x-vercel-ip-city'],
-    region: req.headers['x-vercel-ip-country-region'],
-    country: req.headers['x-vercel-ip-country'],
-    UA: req.headers['user-agent'],
-    // uuid: uuidv4(),
-    date_time: new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }),
-    ulid: ulid()
-  };
-
-   console.log(log);
-
-  // Insert the log entry into Supabase
-  const { data: logEntry, error } = await supabase
-    .from("logs")
-    .insert([log]);
-
-if (error) {  
-  console.error("Error inserting log:", error);  
-  // Handle the error  
-} else {  
-  // Access the inserted data  
-  console.log("Log entry inserted:", logEntry);  
-}  
-
-
 
 });  
   
