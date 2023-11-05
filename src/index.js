@@ -20,6 +20,11 @@ app.use(helmet());
 const supabaseUri = process.env.SUPABASE_URI;  
 const supabaseKey = process.env.SUPABASE_KEY;  
 const supabase = createClient(supabaseUri, supabaseKey);  
+// azure open ai
+openai.apiType = 'azure';  
+openai.apiBase = 'https://ginel-gpt.openai.azure.com/';  
+openai.apiVersion = '2023-07-01-preview';  
+openai.apiKey = process.env.AZURE_KEY;  
 
 // const parse_data= (data) => {
 //   let jsonData=JSON.parse(data);
