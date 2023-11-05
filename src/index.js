@@ -75,17 +75,34 @@ app.all("*", async(req, res) => {
   const strippedStr = jsonString.replace(/`/g, '');   
     
     // check 
-    const message = req.body.messages[0];
+ //    const message = req.body.messages[0];
 
-  if (message instanceof Object)
-  {
-      const response = await invokeOpenAIEndpoint(message);     
-      res.send(response);
+ //  if (message instanceof Object)
+ //  {
+ //      const response = await invokeOpenAIEndpoint(message);     
+ //      res.send(response);
+ //  }
+ // else
+ //  {
+ //      res.send(' Either no message or not an object');
+ //  }
+
+  const data = req.body;
+
+  if (!data.messages || !Array.isArray(data.messages)) {
+    res.send('No messages found in request body');
+    return;
   }
- else
-  {
-      res.send(' Either no message or not an object');
+
+  const message = req.body.messages[0];
+
+  if (message instanceof Object) {
+    const response = await invokeOpenAIEndpoint(message);
+    res.send(response);
+  } else {
+    res.send('Invalid message format');
   }
+    
   
   // if (typeof data === 'object' && data && isValidFormat(data)) {      
   //   // send the data to OpenAI  
