@@ -6,6 +6,7 @@ import { ulid } from 'ulid';
 import bodyParser from 'body-parser'; 
 import helmet from 'helmet';
 import morgan from 'morgan';
+import openai from 'openai';  
 
 
 const app = express();
