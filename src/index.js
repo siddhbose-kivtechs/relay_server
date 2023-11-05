@@ -78,7 +78,7 @@ app.all("*", (req, res) => {
     res.json({ type: 'not a json data', data: data });    
     console.log({ type: 'not a json data', data: data });  
   }
-  let log_db = {
+  let log = {
     status: "ok",
     url: req.originalUrl,
     ip_address: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
@@ -95,18 +95,20 @@ app.all("*", (req, res) => {
     ulid: ulid()
   };
 
-   console.log(log_db);
+   console.log(log);
 
   // Insert the log entry into Supabase
   const { data: logEntry, error } = await supabase
     .from("logs")
-    .insert([logdb]);
+    .insert([log]);
 
-  // Handle any errors
-  if (error) {
-    console.error("Error inserting log:", error);
-    return res.status(200).send("Out of Order. Contact Admin");
-  }
+if (error) {  
+  console.error("Error inserting log:", error);  
+  // Handle the error  
+} else {  
+  // Access the inserted data  
+  console.log("Log entry inserted:", logEntry);  
+}  
 
 
 
