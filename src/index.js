@@ -87,8 +87,6 @@ app.all("*", async(req, res) => {
  //      res.send(' Either no message or not an object');
  //  }
 
-  const data = req.body;
-
   if (!data.messages || !Array.isArray(data.messages)) {
     res.send('No messages found in request body');
     return;
