@@ -70,7 +70,7 @@ app.all("*", async(req, res) => {
   
   if (typeof data === 'object' && data && isValidFormat(data)) {      
     // send the data to OpenAI  
-    const response = await isValidFormat(strippedStr);  
+    const response = isValidFormat(strippedStr);  
     res.send(response);  
     console.log('JSON DATA');  
   } else {      
