@@ -79,7 +79,7 @@ app.all("*", async(req, res) => {
 
   if (message instanceof Object)
   {
-            res.send(' Has message and is an object');
+            res.send(message);
   }
  else
   {
