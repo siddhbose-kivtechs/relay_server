@@ -48,17 +48,26 @@ async function invokeOpenAIEndpoint(message) {
     }
 }
 
-function isValidFormat(message) {
-    if (!message.role || !message.content) return false;
-    if (typeof message !== 'object') return false;
+// function isValidFormat(message) {
+//     if (!message.role || !message.content) return false;
+//     if (typeof message !== 'object') return false;
 
-    return true;
-}
+//     return true;
+// }
+
+function isValidFormat(message) {  
+    if (typeof message !== 'object') return false; // Check if message is an object first.  
+    if (!message.role || !message.content) return false;  
+  
+    return true;  
+}  
 
 app.all("*", async (req, res) => {
-    const data = req.body;
-    const jsonString = JSON.stringify(data);
-    const strippedStr = jsonString.replace(/`/g, '');
+    // const data = req.body;
+    // const jsonString = JSON.stringify(data);
+    // const strippedStr = jsonString.replace(/`/g, '');
+
+    const data = req.body;  
 
     if (!data.messages || !Array.isArray(data.messages)) {
         res.send('No messages found in request body');
@@ -67,13 +76,13 @@ app.all("*", async (req, res) => {
 
     const message = req.body.messages[0];
 
-    if (isValidFormat(message)) {
-        const response = await invokeOpenAIEndpoint(message);
-        res.send(response);
-    } else {
-        res.send('Invalid message format');
-    }
-
+     if (isValidFormat(message)) {  
+        const response = await invokeOpenAIEndpoint(message.content); // Pass message.content if OpenAI endpoint expects a string.  
+        res.send(response);  
+    } else {  
+        res.send('Invalid message format');  
+    }  
+  
 
     // if (typeof data === 'object' && data && isValidFormat(data)) {      
     //   // send the data to OpenAI  
