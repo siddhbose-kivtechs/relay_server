@@ -73,7 +73,7 @@ app.all("*", (req, res) => {
     // console.log({ type: 'json data', data: strippedStr });
      // parse_data(strippedStr);
       res.json(strippedStr);
-      console.log(strippedStr);
+      console.log('JSON DATA');
   } else {    
     res.json({ type: 'not a json data', data: data });    
     console.log({ type: 'not a json data', data: data });  
