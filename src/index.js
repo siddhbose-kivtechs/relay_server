@@ -98,7 +98,7 @@ app.all("*", async(req, res) => {
     ulid: ulid()
   };
 
-   console.log(log);
+   // console.log(log);
 
   // Insert the log entry into Supabase
   const { data: logEntry, error } = await supabase
@@ -108,10 +108,13 @@ app.all("*", async(req, res) => {
 if (error) {  
   console.error("Error inserting log:", error);  
   // Handle the error  
-} else {  
+} 
+else {  
   // Access the inserted data  
   console.log("Log entry inserted:", logEntry);  
 }  
+    const parsedData = JSON.parse(strippedStr);  
+    console.log(parsedData);  
 });  
   
 
