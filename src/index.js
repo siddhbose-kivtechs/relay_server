@@ -77,12 +77,7 @@ app.all("*", (req, res) => {
   } else {    
     res.json({ type: 'not a json data', data: data });    
     console.log({ type: 'not a json data', data: data });  
-  } 
-
-      const requestBody = req.body;  
-  
-  const result = await verify_data(requestBody);  
-  res.json(result);  
+  }
   let log = {
     status: "ok",
     url: req.originalUrl,
@@ -100,7 +95,7 @@ app.all("*", (req, res) => {
     ulid: ulid()
   };
 
-  // console.log(log);
+   console.log(log);
 
   // Insert the log entry into Supabase
   // const { data: logEntry, error } = await supabase
@@ -116,7 +111,7 @@ app.all("*", (req, res) => {
   // // Log the success message
   // console.log("Log inserted successfully:", logEntry);
 
-  console.log(log);
+
 });  
   
 
