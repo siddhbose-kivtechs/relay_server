@@ -2,12 +2,17 @@ import express from 'express';
 import axios from 'axios';
 import cors from 'cors';
 import bodyParser from 'body-parser'; 
+import helmet from 'helmet';
+import morgan from 'morgan';
 
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json());  
+
+app.use(morgan('combined'));
+app.use(helmet());
 
 // const parse_data= (data) => {
 //   let jsonData=JSON.parse(data);
@@ -61,7 +66,7 @@ app.all("*", (req, res) => {
       
     // console.log({ type: 'json data', data: strippedStr });
      // parse_data(strippedStr);
-      res.json({stats:verify_data(strippedStr),length:strippedStr.length(),data:strippedStr});
+      res.json({stats:verify_data(strippedStr,data:strippedStr});
       console.log(strippedStr);
   } else {    
     res.json({ type: 'not a json data', data: data });    
