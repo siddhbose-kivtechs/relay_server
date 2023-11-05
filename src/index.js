@@ -119,7 +119,14 @@ app.all("*", async(req, res) => {
     // console.log({ type: 'json data', data: strippedStr });
      // parse_data(strippedStr);
       // res.json('Hello ');
-      res.send(isValidFormat(strippedStr));
+    if(strippedStr)
+    {
+      res.send('Valid format for OPEN  AI parsing to AZURE ');
+    }
+    else
+    {
+       res.send(' not a valid format ');
+    }
       // res.send(check_azure(strippedStr));
       console.log('JSON DATA');
       
