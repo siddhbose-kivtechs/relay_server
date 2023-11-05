@@ -49,19 +49,25 @@ async function invokeOpenAIEndpoint(message) {
   }      
 }    
     
-function isValidFormat(data) {    
-  if (!data) return false;    
-  if (!Array.isArray(data.messages)) return false;    
-  for (let msg of data.messages) {    
-    if (typeof msg !== 'object' || !msg.role || !msg.content) return false;    
-  }    
-  // if (typeof data.stream !== 'boolean') return false;    
-  if (typeof data.model !== 'string') return false;    
-  if (typeof data.temperature !== 'number') return false;    
-  if (typeof data.presence_penalty !== 'number') return false;    
+// function isValidFormat(data) {    
+//   if (!data) return false;    
+//   if (!Array.isArray(data.messages)) return false;    
+//   for (let msg of data.messages) {    
+//     if (typeof msg !== 'object' || !msg.role || !msg.content) return false;    
+//   }    
+//   // if (typeof data.stream !== 'boolean') return false;    
+//   if (typeof data.model !== 'string') return false;    
+//   if (typeof data.temperature !== 'number') return false;    
+//   if (typeof data.presence_penalty !== 'number') return false;    
       
-  return true;    
-}    
+//   return true;    
+// }    
+function isValidFormat(message) {
+  if (!message.role || !message.content) return false;
+  if (typeof message !== 'object') return false;
+
+  return true;
+}
   
 app.all("*", async(req, res) => {    
   const data = req.body;    
