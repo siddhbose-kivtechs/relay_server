@@ -1,12 +1,12 @@
-const express = require('express');
-const axios = require('axios');
-const cors = require('cors');
-const { createClient } = require("@supabase/supabase-js");
-const { ulid } = require('ulid');
-const bodyParser = require('body-parser');
-const helmet = require('helmet');
-const morgan = require('morgan');
-const openai = require('openai');
+import express from 'express';    
+import axios from 'axios';    
+import cors from 'cors';    
+import { createClient } from "@supabase/supabase-js";    
+import { ulid } from 'ulid';    
+import bodyParser from 'body-parser';     
+import helmet from 'helmet';    
+import morgan from 'morgan';    
+import openai from 'openai'; 
 
 const app = express();
 const PORT = process.env.PORT || 3000;
