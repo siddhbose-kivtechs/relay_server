@@ -78,8 +78,10 @@ app.all("*", async(req, res) => {
       
     // console.log({ type: 'json data', data: strippedStr });
      // parse_data(strippedStr);
-      res.json(strippedStr);
+      // res.json('Hello ');
+      res.send(' How Can KIVTECHS help you ? ');
       console.log('JSON DATA');
+      
   } else {    
     res.json({ type: 'not a json data', data: data });    
     console.log({ type: 'not a json data', data: data });  
