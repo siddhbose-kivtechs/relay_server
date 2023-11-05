@@ -101,8 +101,8 @@ app.all("*", async(req, res) => {
     // console.log({ type: 'json data', data: strippedStr });
      // parse_data(strippedStr);
       // res.json('Hello ');
-      // res.send(' How Can KIVTECHS help you ? ');
-      res.send(check_azure(strippedStr));
+      res.send(' How Can KIVTECHS help you ? ');
+      // res.send(check_azure(strippedStr));
       console.log('JSON DATA');
       
   } else {    
