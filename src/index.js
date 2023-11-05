@@ -65,7 +65,7 @@ console.log(' Not a valid JSON');
 }
 // ***  ALL METHOD***
 
-app.all("*", (req, res) => {  
+app.all("*", async(req, res) => {  
   const data = req.body;  
   
   if (verify_data && typeof data === 'object' && data) {    
