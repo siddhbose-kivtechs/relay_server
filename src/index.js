@@ -75,7 +75,7 @@ openai.apiKey = process.env.AZURE_KEY;
 async function invokeOpenAIEndpoint(message) {  
   // const endpoint = 'https://ginel-gpt.openai.azure.com/openai/deployments/gpt-35-turbo/chat/completions?api-version=2023-07-01-preview';  
     const endpoint='https://ginel-gpt.openai.azure.com/openai/deployments/gpt-35-turbo-16k/chat/completions?api-version=2023-07-01-preview';
-  const apiKey = os.getenv('AZURE_KEY');  
+
   
   try {  
     const response = await axios.post(endpoint, {  
@@ -100,8 +100,7 @@ async function invokeOpenAIEndpoint(message) {
   }  
 }  
 
-  
- async (check_azure = (data) => {  
+ const check_azure = async (data) => {  
   try {  
     const { messages, model, temperature, presence_penalty } = data;  
   
