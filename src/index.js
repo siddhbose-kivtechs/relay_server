@@ -55,7 +55,7 @@ function isValidFormat(data) {
   for (let msg of data.messages) {    
     if (typeof msg !== 'object' || !msg.role || !msg.content) return false;    
   }    
-  if (typeof data.stream !== 'boolean') return false;    
+  // if (typeof data.stream !== 'boolean') return false;    
   if (typeof data.model !== 'string') return false;    
   if (typeof data.temperature !== 'number') return false;    
   if (typeof data.presence_penalty !== 'number') return false;    
