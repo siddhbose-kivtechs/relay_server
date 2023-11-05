@@ -20,11 +20,7 @@ app.use(helmet());
 const supabaseUri = process.env.SUPABASE_URI;  
 const supabaseKey = process.env.SUPABASE_KEY;  
 const supabase = createClient(supabaseUri, supabaseKey);  
-// azure open ai
-openai.apiType = 'azure';  
-openai.apiBase = 'https://ginel-gpt.openai.azure.com/';  
-openai.apiVersion = '2023-07-01-preview';  
-openai.apiKey = process.env.AZURE_KEY;  
+
 
 // const parse_data= (data) => {
 //   let jsonData=JSON.parse(data);
@@ -66,6 +62,68 @@ console.log(' Not a valid JSON');
      
   }  
 }
+
+//  call AZURE open AI
+// azure open ai
+openai.apiType = 'azure';  
+openai.apiBase = 'https://ginel-gpt.openai.azure.com/';  
+openai.apiVersion = '2023-07-01-preview';  
+openai.apiKey = process.env.AZURE_KEY;  
+
+
+  
+async function invokeOpenAIEndpoint(message) {  
+  // const endpoint = 'https://ginel-gpt.openai.azure.com/openai/deployments/gpt-35-turbo/chat/completions?api-version=2023-07-01-preview';  
+    const endpoint='https://ginel-gpt.openai.azure.com/openai/deployments/gpt-35-turbo-16k/chat/completions?api-version=2023-07-01-preview';
+  const apiKey = os.getenv('AZURE_KEY');  
+  
+  try {  
+    const response = await axios.post(endpoint, {  
+      prompt: message,  
+      model: 'gpt-35-turbo-16k',  
+      max_tokens: 800,  
+      temperature: 0.7,  
+      top_p: 0.95,  
+      frequency_penalty: 0,  
+      presence_penalty: 0  
+    }, {  
+      headers: {  
+        'Content-Type': 'application/json',  
+        'Authorization': `Bearer ${apiKey}`  
+      }  
+    });  
+  
+    return response.data.choices[0].text.trim();  
+  } catch (error) {  
+    console.error('Error invoking OpenAI endpoint:', error);  
+    throw error;  
+  }  
+}  
+
+  
+ async (check_azure = (data) => {  
+  try {  
+    const { messages, model, temperature, presence_penalty } = data;  
+  
+    const prompt = messages.map(message => `${message.role}: ${message.content}`).join('\n');  
+    const openAIRequest = {  
+      prompt,  
+      model,  
+      temperature,  
+      presence_penalty  
+    };  
+  
+    const response = await invokeOpenAIEndpoint(openAIRequest);  
+  
+    // res.json({ response });  
+      return response;
+  } catch (error) {  
+    console.error('Error processing request:', error);  
+    // res.status(500).json({ error: 'An error occurred' });  
+      return 'ERROR occured';
+  }  
+}); 
+
 // ***  ALL METHOD***
 
 app.all("*", async(req, res) => {  
@@ -79,7 +137,8 @@ app.all("*", async(req, res) => {
     // console.log({ type: 'json data', data: strippedStr });
      // parse_data(strippedStr);
       // res.json('Hello ');
-      res.send(' How Can KIVTECHS help you ? ');
+      // res.send(' How Can KIVTECHS help you ? ');
+      res.send(check_azure(strippedStr));
       console.log('JSON DATA');
       
   } else {    
