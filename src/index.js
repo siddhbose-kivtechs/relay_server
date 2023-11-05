@@ -1,6 +1,8 @@
 import express from 'express';
 import axios from 'axios';
 import cors from 'cors';
+import { createClient } from "@supabase/supabase-js";
+import { ulid } from 'ulid';
 import bodyParser from 'body-parser'; 
 import helmet from 'helmet';
 import morgan from 'morgan';
@@ -13,6 +15,10 @@ app.use(bodyParser.json());
 
 app.use(morgan('combined'));
 app.use(helmet());
+// Create a Supabase client  
+const supabaseUri = process.env.SUPABASE_URI;  
+const supabaseKey = process.env.SUPABASE_KEY;  
+const supabase = createClient(supabaseUri, supabaseKey);  
 
 // const parse_data= (data) => {
 //   let jsonData=JSON.parse(data);
@@ -66,7 +72,7 @@ app.all("*", (req, res) => {
       
     // console.log({ type: 'json data', data: strippedStr });
      // parse_data(strippedStr);
-      res.json({stats:verify_data(strippedStr,data:strippedStr});
+      res.json(strippedStr);
       console.log(strippedStr);
   } else {    
     res.json({ type: 'not a json data', data: data });    
