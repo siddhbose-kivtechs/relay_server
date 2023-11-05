@@ -79,7 +79,8 @@ app.all("*", async(req, res) => {
 
   if (message instanceof Object)
   {
-            res.send(message);
+      const response = await invokeOpenAIEndpoint(message);     
+      res.send(response);
   }
  else
   {
