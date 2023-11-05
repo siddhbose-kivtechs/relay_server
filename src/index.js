@@ -88,6 +88,24 @@ const check_azure = async (data) => {
   }    
 } 
 
+
+
+// verify if it matches the open ai form 
+
+function isValidFormat(data) {  
+  if (!data) return false;  
+  if (!Array.isArray(data.messages)) return false;  
+  for (let msg of data.messages) {  
+    if (typeof msg !== 'object' || !msg.role || !msg.content) return false;  
+  }  
+  if (typeof data.stream !== 'boolean') return false;  
+  if (typeof data.model !== 'string') return false;  
+  if (typeof data.temperature !== 'number') return false;  
+  if (typeof data.presence_penalty !== 'number') return false;  
+    
+  return true;  
+}  
+
 // ***  ALL METHOD***
 
 app.all("*", async(req, res) => {  
@@ -101,7 +119,7 @@ app.all("*", async(req, res) => {
     // console.log({ type: 'json data', data: strippedStr });
      // parse_data(strippedStr);
       // res.json('Hello ');
-      res.send(' How Can KIVTECHS help you ? ');
+      res.send(isValidFormat(strippedStr));
       // res.send(check_azure(strippedStr));
       console.log('JSON DATA');
       
