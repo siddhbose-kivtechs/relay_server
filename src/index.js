@@ -68,8 +68,10 @@ app.all("*", async (req, res) => {
     }
   else
     {
-      res.send(getChatbotResponse(data.messages));
-      console.log(data.messages);
+      let message=[];
+      // res.send(getChatbotResponse(data.messages));
+      // console.log(data.messages);
+      res.send(data);
       
     }
   // res.send(strippedStr);
