@@ -45,9 +45,9 @@ async function generateResponse(message) {
 
   return response.data.choices[0].text.trim();
 }
-const openai = new ChatCompletion({  
-  apiKey: process.env.OPENAI_API_KEY,  
-});  
+// const openai = new ChatCompletion({  
+//   apiKey: process.env.OPENAI_API_KEY,  
+// });  
 
 // async function generateResponse(message) {
 // return message;
