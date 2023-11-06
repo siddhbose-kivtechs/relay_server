@@ -7,6 +7,7 @@ import bodyParser from 'body-parser';
 import helmet from 'helmet';    
 import morgan from 'morgan';    
 import openai from 'openai'; 
+import OpenAI from 'openai';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -20,33 +21,78 @@ const supabaseUri = process.env.SUPABASE_URI;
 const supabaseKey = process.env.SUPABASE_KEY;
 const supabase = createClient(supabaseUri, supabaseKey);
 
-const azureKey = process.env.AZURE_KEY;
+// const azureKey = process.env.AZURE_KEY;
 
-async function invokeOpenAIEndpoint(message) {
-    const endpoint = 'https://ginel-gpt.openai.azure.com/openai/deployments/gpt-35-turbo-16k/chat/completions?api-version=2023-07-01-preview';
-    console.log(message);
-    try {
-        const response = await axios.post(endpoint, {
-            prompt: message,
-            model: 'gpt-35-turbo-16k',
-            max_tokens: 800,
-            temperature: 0.7,
-            top_p: 0.95,
-            frequency_penalty: 0,
-            presence_penalty: 0
-        }, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${azureKey}`
-            }
-        });
-            console.log(response);
-        return response.data.choices[0].text.trim();
-    } catch (error) {
-        console.error('Error invoking OpenAI endpoint:', error);
-        throw error;
-    }
+
+openai.api_type = 'azure';
+openai.api_base = 'https://genos.openai.azure.com/';
+openai.api_version = '2023-07-01-preview';
+openai.api_key = process.env.AZURE_KEY;
+
+async function generateResponse(message) {
+  const response = await openai.ChatCompletion.create({
+    engine: 'gpt-35-turbo-16k',
+    messages: [{ role: 'user', content: message }],
+    temperature: 0.7,
+    max_tokens: 200,
+    top_p: 0.95,
+    frequency_penalty: 0,
+    presence_penalty: 0,
+    stop: null,
+  });
+
+  return response.data.choices[0].text.trim();
 }
+
+
+
+// async function invokeOpenAIEndpoint(message) {
+//     const endpoint = 'https://ginel-gpt.openai.azure.com/openai/deployments/gpt-35-turbo-16k/chat/completions?api-version=2023-07-01-preview';
+//     console.log(message);
+//     try {
+//         const response = await axios.post(endpoint, {
+//             prompt: message,
+//             model: 'gpt-35-turbo-16k',
+//             max_tokens: 800,
+//             temperature: 0.7,
+//             top_p: 0.95,
+//             frequency_penalty: 0,
+//             presence_penalty: 0
+//         }, {
+//             headers: {
+//                 'Content-Type': 'application/json',
+//                 'Authorization': `Bearer ${azureKey}`
+//             }
+//         });
+//             console.log(response);
+//         return response.data.choices[0].text.trim();
+//     } catch (error) {
+//         console.error('Error invoking OpenAI endpoint:', error);
+//         throw error;
+//     }
+// }
+
+
+// const openai = new OpenAI(azureKey);  
+// async function invokeOpenAIEndpoint(message) {  
+//   try {  
+//     const response = await openai.complete({  
+//       engine: 'text-davinci-003',  
+//       prompt: message,  
+//       maxTokens: 800,  
+//       temperature: 0.7,  
+//       topP: 0.95,  
+//       frequencyPenalty: 0,  
+//       presencePenalty: 0  
+//     });  
+//     return response.choices[0].text.trim();  
+//   } catch (error) {  
+//     console.error('Error invoking OpenAI endpoint:', error);  
+//     throw error;  
+//   }  
+// } 
+
+
 
 // function isValidFormat(message) {
 //     if (!message.role || !message.content) return false;
@@ -61,6 +107,17 @@ function isValidFormat(message) {
   
     return true;  
 }  
+
+
+async function main(message) {
+  const chatCompletion = await openai.chat.completions.create({
+    messages: [{ role: 'user', content: 'Say this is a test' }],
+    model: 'gpt-3.5-turbo',
+  });
+
+  console.log(chatCompletion.choices);
+}
+
 
 app.all("*", async (req, res) => {
     // const data = req.body;
@@ -77,7 +134,8 @@ app.all("*", async (req, res) => {
     const message = req.body.messages[0];
 
      if (isValidFormat(message)) {  
-        const response = await invokeOpenAIEndpoint(message.content); // Pass message.content if OpenAI endpoint expects a string.  
+        // const response = await invokeOpenAIEndpoint(message.content); // Pass message.content if OpenAI endpoint expects a string.  
+        const response = await generateResponse(message.content); 
         res.send(response);  
     } else {  
         res.send('Invalid message format');  
