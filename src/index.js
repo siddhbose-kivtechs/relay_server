@@ -66,7 +66,11 @@ app.all("*", async (req, res) => {
         res.send('No messages found in request body');
         return;
     }
-  res.send(strippedStr);
+  else
+    {
+      res.send(strippedStr.messages);
+    }
+  // res.send(strippedStr);
   // try {  
   //    const message=req.body;
     
