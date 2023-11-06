@@ -20,7 +20,7 @@ const messages = [
   { role: "user", content: "What's the best way to train a parrot?" },
 ];
   
-async function main() {
+async function getChatbotResponse() {
   console.log("== Chat Completions Sample ==");
 
   const client = new OpenAIClient(endpoint, new AzureKeyCredential(azureApiKey));
