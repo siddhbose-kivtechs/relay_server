@@ -5,7 +5,7 @@ import { OpenAIClient, AzureKeyCredential } from "@azure/openai";
 
 
 // Load the .env file if it exists
-require("dotenv").config();
+import dotenv from "dotenv/config";
 const app = express();  
 const port = 3000;  
 
