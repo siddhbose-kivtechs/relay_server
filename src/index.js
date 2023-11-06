@@ -195,7 +195,7 @@ app.all("*", async (req, res) => {
         // Access the inserted data  
         console.log("Log entry inserted:", logEntry);
     }
-    const parsedData = JSON.parse(strippedStr);
+    // const parsedData = JSON.parse(strippedStr);
     console.log(parsedData);
 });
 
