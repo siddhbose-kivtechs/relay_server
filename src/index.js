@@ -6,7 +6,7 @@ import { ulid } from 'ulid';
 import bodyParser from 'body-parser';     
 import helmet from 'helmet';    
 import morgan from 'morgan';    
-// import openai from 'openai'; 
+import openai from 'openai'; 
 // import { ChatCompletion } from "@openai/api";  
 
 
