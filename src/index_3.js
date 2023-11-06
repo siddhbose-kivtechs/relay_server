@@ -17,7 +17,10 @@ app.use(helmet());
 
 const OPENAI_API_ENDPOINT = 'https://ginel-gpt.openai.azure.com/openai/deployments/gpt-35-turbo-16k/chat/completions?api-version=2023-07-01-preview';  
 const OPENAI_API_KEY = process.env.AZURE_KEY;  
-
+openai.api_type = 'azure';
+openai.api_base = 'https://genos.openai.azure.com/';
+openai.api_version = '2023-07-01-preview';
+openai.api_key = process.env.AZURE_KEY;
 
   
 app.all('*', async (req, res) => {  
