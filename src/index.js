@@ -44,7 +44,7 @@ function isValidFormat(message) {
 }  
 
 
-async function getChatbotResponse() {
+async function getChatbotResponse(messages) {
   console.log("== Chat Completions Sample ==");
 
   const client = new OpenAIClient(endpoint, new AzureKeyCredential(azureApiKey));
@@ -68,7 +68,9 @@ app.all("*", async (req, res) => {
     }
   else
     {
-      res.send(data.messages);
+      res.send(getChatbotResponse(data.messages));
+      console.log(data.messages);
+      
     }
   // res.send(strippedStr);
   // try {  
