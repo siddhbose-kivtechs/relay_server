@@ -59,7 +59,7 @@ async function getChatbotResponse() {
   
 app.all("*", async (req, res) => {  
   try {  
-     const message=req.body.messages;
+     const message=req.body;
     
        if (isValidFormat(message)) {  
         // const response = await invokeOpenAIEndpoint(message.content); // Pass message.content if OpenAI endpoint expects a string.  
