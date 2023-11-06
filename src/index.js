@@ -20,7 +20,7 @@ const supabaseUri = process.env.SUPABASE_URI;
 const supabaseKey = process.env.SUPABASE_KEY;
 const supabase = createClient(supabaseUri, supabaseKey);
 
-const apiKey = process.env.AZURE_KEY;
+const azureKey = process.env.AZURE_KEY;
 
 async function invokeOpenAIEndpoint(message) {
     const endpoint = 'https://ginel-gpt.openai.azure.com/openai/deployments/gpt-35-turbo-16k/chat/completions?api-version=2023-07-01-preview';
@@ -37,10 +37,10 @@ async function invokeOpenAIEndpoint(message) {
         }, {
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${apiKey}`
+                'Authorization': `Bearer ${azureKey}`
             }
         });
-
+            console.log(response);
         return response.data.choices[0].text.trim();
     } catch (error) {
         console.error('Error invoking OpenAI endpoint:', error);
