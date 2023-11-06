@@ -44,16 +44,27 @@ function isValidFormat(message) {
 }  
 
 
-async function getChatbotResponse(messages) {
-  console.log("== Chat Completions Sample ==");
+// async function getChatbotResponse(messages) {
+//   console.log("== Chat Completions Sample ==");
+
+//   const client = new OpenAIClient(endpoint, new AzureKeyCredential(azureApiKey));
+//   const deploymentId = "gpt-35-turbo-16k";
+//   const result = await client.getChatCompletions(deploymentId, messages);
+
+//   for (const choice of result.choices) {
+//     console.log(choice.message);
+//     return (choice.message);
+//   }
+// }
+async function getChatbotResponse(message) {
+ 
 
   const client = new OpenAIClient(endpoint, new AzureKeyCredential(azureApiKey));
   const deploymentId = "gpt-35-turbo-16k";
-  const result = await client.getChatCompletions(deploymentId, messages);
+  const result = await client.getCompletions(deploymentId, message, { maxTokens: 128 });
 
   for (const choice of result.choices) {
-    console.log(choice.message);
-    return (choice.message);
+    console.log(choice.text);
   }
 }
   
