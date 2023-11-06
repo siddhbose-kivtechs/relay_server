@@ -5,7 +5,6 @@ import bodyParser from 'body-parser';
 import helmet from 'helmet';  
 import morgan from 'morgan';  
 import openai from 'openai';  
-import os from 'os';  
   
 openai.api_type = "azure";  
 openai.api_base = "https://ginel-gpt.openai.azure.com/";  
