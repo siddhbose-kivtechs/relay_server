@@ -58,23 +58,33 @@ async function getChatbotResponse() {
 }
   
 app.all("*", async (req, res) => {  
-  try {  
-     const message=req.body;
+      const data = req.body;
+    const jsonString = JSON.stringify(data);
+    const strippedStr = jsonString.replace(/`/g, '');
+
+    if (!data.messages || !Array.isArray(data.messages)) {
+        res.send('No messages found in request body');
+        return;
+    }
+  res.send(strippedStr);
+  // try {  
+  //    const message=req.body;
     
-       if (isValidFormat(message)) {  
-        // const response = await invokeOpenAIEndpoint(message.content); // Pass message.content if OpenAI endpoint expects a string.  
-        // const response = await generateResponse(message.content); 
-         // const response = await generateResponse(message); 
-        res.send(message);  
-    } else {  
-        res.send('Invalid message format');  
-    }  
-    // const response = await getChatbotResponse();  
-    // res.send(response);  
-  } catch (error) {  
-    console.error("Error:", error);  
-    res.status(500).send("Internal Server Error");  
-  }  
+  //      if (isValidFormat(message)) {  
+  //       // const response = await invokeOpenAIEndpoint(message.content); // Pass message.content if OpenAI endpoint expects a string.  
+  //       // const response = await generateResponse(message.content); 
+  //        // const response = await generateResponse(message); 
+  //       res.send(message);  
+  //   }
+  //      else {  
+  //       res.send('Invalid message format');  
+  //   }  
+  //   // const response = await getChatbotResponse();  
+  //   // res.send(response);  
+  // } catch (error) {  
+  //   console.error("Error:", error);  
+  //   res.status(500).send("Internal Server Error");  
+  // }  
 });  
   
 app.listen(PORT, () => {  
