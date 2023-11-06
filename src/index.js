@@ -68,7 +68,7 @@ app.all("*", async (req, res) => {
     }
   else
     {
-      res.send(strippedStr.messages);
+      res.send(data.messages);
     }
   // res.send(strippedStr);
   // try {  
