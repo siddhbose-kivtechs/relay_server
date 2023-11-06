@@ -140,18 +140,18 @@ app.all("*", async (req, res) => {
     //     return;
     // }
 
-    // // const message = req.body.messages[0];
-    // const message=req.body.messages;
+    // const message = req.body.messages[0];
+    const message=req.body.messages;
 
-    //  if (isValidFormat(message)) {  
-    //     // const response = await invokeOpenAIEndpoint(message.content); // Pass message.content if OpenAI endpoint expects a string.  
-    //     // const response = await generateResponse(message.content); 
-    //      const response = await generateResponse(message); 
-    //     res.send(response);  
-    // } else {  
-    //     res.send('Invalid message format');  
-    // }  
-    res.send(req.body);
+     if (isValidFormat(message)) {  
+        // const response = await invokeOpenAIEndpoint(message.content); // Pass message.content if OpenAI endpoint expects a string.  
+        // const response = await generateResponse(message.content); 
+         const response = await generateResponse(message); 
+        res.send(response);  
+    } else {  
+        res.send('Invalid message format');  
+    }  
+    // res.send(req.body);
   
 
     // if (typeof data === 'object' && data && isValidFormat(data)) {      
