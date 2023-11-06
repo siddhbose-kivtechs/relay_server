@@ -22,7 +22,7 @@ const OPENAI_API_KEY = process.env.AZURE_KEY;
   
 app.all('*', async (req, res) => {  
   try {  
-    const  message = {"messages": [{"role": "system","content": "You are an AI assistant that helps people find information." }];
+   const message = {"messages": [{"role": "system","content": "You are an AI assistant that helps people find information." }]};  
       
     // Make a request to the Azure OpenAI API  
     const response = await axios.post(  
