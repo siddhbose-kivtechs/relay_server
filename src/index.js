@@ -70,7 +70,7 @@ app.all("*", async (req, res) => {
         res.send('Invalid message format');  
     }  
     // const response = await getChatbotResponse();  
-    res.send(response);  
+    // res.send(response);  
   } catch (error) {  
     console.error("Error:", error);  
     res.status(500).send("Internal Server Error");  
