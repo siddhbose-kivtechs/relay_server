@@ -80,7 +80,7 @@ app.all("*", async (req, res) => {
   else
     {
       // let message=[{"role": "system", "content": "You are an AI assistant that helps people find information."} ];
-      let message=[ { "role": "user", "content": "hi: } ];
+     const message=[ { "role": "user", "content": "hi: } ];
       res.send(getChatbotResponse(message));
       console.log(data.messages);
       // res.send(data);
