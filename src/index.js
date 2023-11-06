@@ -10,8 +10,8 @@ const app = express();
 const port = 3000;  
 
 // You will need to set these environment variables or edit the following values
-const endpoint = process.env["ENDPOINT"];
-const azureApiKey = process.env["AZURE_KEY"];
+const endpoint = process.env.ENDPOINT;
+const azureApiKey = process.env.AZURE_KEY;
   
 const prompt = ["What is Azure OpenAI?"];  
   
