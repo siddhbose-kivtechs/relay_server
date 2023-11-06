@@ -13,20 +13,25 @@ const port = 3000;
 const endpoint = process.env.ENDPOINT;
 const azureApiKey = process.env.AZURE_KEY;
   
-const prompt = ["What is Azure OpenAI?"];  
+const messages = [
+  { role: "system", content: "You are a helpful assistant. You will talk like a pirate." },
+  { role: "user", content: "Can you help me?" },
+  { role: "assistant", content: "Arrrr! Of course, me hearty! What can I do for ye?" },
+  { role: "user", content: "What's the best way to train a parrot?" },
+];
   
-async function getChatbotResponse() {  
-  const client = new OpenAIClient(endpoint, new AzureKeyCredential(azureApiKey));  
-  const deploymentId = "gpt-35-turbo-16k";  
-  const result = await client.getCompletions(deploymentId, prompt, { maxTokens: 128 });  
-  
-  let chatbotResponse = "";  
-  for (const choice of result.choices) {  
-    chatbotResponse += choice.text;  
-  }  
-  
-  return chatbotResponse;  
-}  
+async function main() {
+  console.log("== Chat Completions Sample ==");
+
+  const client = new OpenAIClient(endpoint, new AzureKeyCredential(azureApiKey));
+  const deploymentId = "gpt-35-turbo-16k";
+  const result = await client.getChatCompletions(deploymentId, messages);
+
+  for (const choice of result.choices) {
+    console.log(choice.message);
+    return (choice.message);
+  }
+}
   
 app.all("*", async (req, res) => {  
   try {  
