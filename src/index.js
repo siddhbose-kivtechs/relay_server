@@ -54,3 +54,8 @@ app.all('*', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });  
   }  
 });  
+
+
+app.listen(PORT, () => {
+    console.log(`Relay app is listening on port ${PORT}`);
+});
