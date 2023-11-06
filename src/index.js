@@ -22,8 +22,7 @@ const supabase = createClient(supabaseUri, supabaseKey);
 
 // Load the .env file if it exists
 import dotenv from "dotenv/config";
-const app = express();  
-const port = 3000;  
+
 
 // You will need to set these environment variables or edit the following values
 const endpoint = process.env.ENDPOINT;
