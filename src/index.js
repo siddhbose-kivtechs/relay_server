@@ -9,7 +9,7 @@ import openai from 'openai';
 openai.api_type = "azure";  
 openai.api_base = "https://ginel-gpt.openai.azure.com/";  
 openai.api_version = "2023-07-01-preview";  
-openai.api_key = os.getenv("OPENAI_API_KEY");  
+openai.api_key = process.env.AZURE_KEY";  
   
 const app = express();  
 const PORT = process.env.PORT || 3000;  
