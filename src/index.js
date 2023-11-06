@@ -17,7 +17,7 @@ const prompt = ["What is Azure OpenAI?"];
   
 async function getChatbotResponse() {  
   const client = new OpenAIClient(endpoint, new AzureKeyCredential(azureApiKey));  
-  const deploymentId = "text-davinci-003";  
+  const deploymentId = "gpt-35-turbo-16k";  
   const result = await client.getCompletions(deploymentId, prompt, { maxTokens: 128 });  
   
   let chatbotResponse = "";  
