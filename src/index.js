@@ -6,7 +6,9 @@ import { ulid } from 'ulid';
 import bodyParser from 'body-parser';     
 import helmet from 'helmet';    
 import morgan from 'morgan';    
-import openai from 'openai'; 
+// import openai from 'openai'; 
+import { ChatCompletion } from "@openai/api";  
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -28,19 +30,26 @@ openai.api_base = 'https://genos.openai.azure.com/';
 openai.api_version = '2023-07-01-preview';
 openai.api_key = process.env.AZURE_KEY;
 
-async function generateResponse(message) {
-  const response = await openai.ChatCompletion.create({
-    engine: 'gpt-35-turbo-16k',
-    messages: [{ role: 'user', content: message }],
-    temperature: 0.7,
-    max_tokens: 200,
-    top_p: 0.95,
-    frequency_penalty: 0,
-    presence_penalty: 0,
-    stop: null,
-  });
+// async function generateResponse(message) {
+//   const response = await openai.ChatCompletion.create({
+//     engine: 'gpt-35-turbo-16k',
+//     messages: [{ role: 'user', content: message }],
+//     temperature: 0.7,
+//     max_tokens: 200,
+//     top_p: 0.95,
+//     frequency_penalty: 0,
+//     presence_penalty: 0,
+//     stop: null,
+//   });
 
-  return response.data.choices[0].text.trim();
+//   return response.data.choices[0].text.trim();
+// }
+// const openai = new ChatCompletion({  
+//   apiKey: process.env.OPENAI_API_KEY,  
+// });  
+
+async function generateResponse(message) {
+return message;
 }
 
 
