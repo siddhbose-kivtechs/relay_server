@@ -88,14 +88,15 @@ res.send(response.content);
     if (error) {
         console.error("Error inserting log:", error);
         // Handle the error  
-    } else {
+    } 
+    else {
         // Access the inserted data  
         console.log("Log entry inserted:", logEntry);
     }
         
     }
 
-  } 
+  
 
     let log = {
         status: "ok",
@@ -122,7 +123,8 @@ res.send(response.content);
     if (error) {
         console.error("Error inserting log:", error);
         // Handle the error  
-    } else {
+    } 
+    else {
         // Access the inserted data  
         console.log("Log entry inserted:", logEntry);
     }
