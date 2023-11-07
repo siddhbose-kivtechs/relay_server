@@ -55,6 +55,12 @@ messages.push(messa);
     return (choice.message);
   }
 }
+
+function test(messa)
+{
+return messa;
+}
+
   
 app.all("*", async (req, res) => {  
   const data = req.body;  
@@ -66,7 +72,8 @@ app.all("*", async (req, res) => {
     return;  
   } else {  
  
-    res.send(getChatbotResponse(data.messages));  
+    // res.send(getChatbotResponse(data.messages));
+    res.send(test(data.messages));
 
   }  
 }); 
