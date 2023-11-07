@@ -42,9 +42,9 @@ function isValidFormat(message) {
 // }  
 async function getChatbotResponse(messa) {
   //  generate messages ultitlizing both the mess string and the user request
-const messages = [...mess];  
-messages.push(messa); 
-  console.log(messa);
+const messages = [...mess,...messa];  
+
+  console.log(messages);
 
   const client = new OpenAIClient(endpoint, new AzureKeyCredential(azureApiKey));
   const deploymentId = "gpt-35-turbo-16k";
@@ -72,8 +72,8 @@ app.all("*", async (req, res) => {
     return;  
   } else {  
  
-    // res.send(getChatbotResponse(data.messages));
-    res.send(test(data.messages));
+    res.send(getChatbotResponse(data.messages));
+    // res.send(test(data.messages));
 
   }  
 }); 
