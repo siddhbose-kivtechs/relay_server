@@ -23,12 +23,8 @@ const supabase = createClient(supabaseUri, supabaseKey);
 const endpoint = process.env.ENDPOINT;  
 const azureApiKey = process.env.AZURE_KEY;  
   
-const messages = [  
-  { role: "system", content: "You are a helpful assistant. You will talk like a pirate." },  
-  { role: "user", content: "Can you help me?" },  
-  { role: "assistant", content: "Arrrr! Of course, me hearty! What can I do for ye?" },  
-  { role: "user", content: "What's the best way to train a parrot?" },  
-];  
+const mess = [  
+  { role: "system", content: "You are a helpful assistant. You will talk like a pirate." }];
   
 function isValidFormat(message) {  
   if (typeof message !== 'object') return false; // Check if message is an object first.  
@@ -36,14 +32,27 @@ function isValidFormat(message) {
   return true;  
 }  
   
-async function getChatbotResponse(message) {  
-  const client = new OpenAIClient(endpoint, new AzureKeyCredential(azureApiKey));  
-  const deploymentId = "gpt-35-turbo-16k";  
-  const result = await client.getCompletions(deploymentId, message, { maxTokens: 128 });  
-  for (const choice of result.choices) {  
-    console.log(choice.text);  
-  }  
-}  
+// async function getChatbotResponse(message) {  
+//   const client = new OpenAIClient(endpoint, new AzureKeyCredential(azureApiKey));  
+//   const deploymentId = "gpt-35-turbo-16k";  
+//   const result = await client.getCompletions(deploymentId, message, { maxTokens: 128 });  
+//   for (const choice of result.choices) {  
+//     console.log(choice.text);  
+//   }  
+// }  
+async function getChatbotResponse(messa) {
+const messages = [...mess];  
+messages.push(messa); 
+
+  const client = new OpenAIClient(endpoint, new AzureKeyCredential(azureApiKey));
+  const deploymentId = "gpt-35-turbo-16k";
+  const result = await client.getChatCompletions(deploymentId, messages);
+
+  for (const choice of result.choices) {
+    console.log(choice.message);
+    return (choice.message);
+  }
+}
   
 app.all("*", async (req, res) => {  
   const data = req.body;  
@@ -54,11 +63,13 @@ app.all("*", async (req, res) => {
     res.send('No messages found in request body');  
     return;  
   } else {  
-    const message = [{ "role": "user", "content": "hi" }];  
-    res.send(await getChatbotResponse(message));  
-    console.log(data.messages);  
+ 
+    res.send(getChatbotResponse(data.messages));  
+
   }  
-});  
+}); 
+
+
   
 app.listen(PORT, () => {  
   console.log(`Server listening on port ${PORT}`);  
