@@ -22,6 +22,7 @@ const supabase = createClient(supabaseUri, supabaseKey);
 // You will need to set these environment variables or edit the following values  
 const endpoint = process.env.ENDPOINT;  
 const azureApiKey = process.env.AZURE_KEY;  
+const ulidgen=ulid();
   
 const mess = [  
   { role: "system", content: "You are a helpful assistant." }];
@@ -77,8 +78,9 @@ res.send(response.content);
     // res.send(test(data.messages));
     let dbdata={
         created_at: new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }),
-      request:data,
-        response:response
+        in:data,
+        out:response,
+      ulid:ulidgen
     };
         // Insert the log entry into Supabase
     const { data: logEntry, error } = await supabase
@@ -112,7 +114,7 @@ res.send(response.content);
         UA: req.headers['user-agent'],
         // uuid: uuidv4(),
         date_time: new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }),
-        ulid: ulid()
+        ulid: ulidgen
     };
 
     // Insert the log entry into Supabase
