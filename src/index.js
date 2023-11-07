@@ -75,6 +75,25 @@ app.all("*", async (req, res) => {
   const response = await getChatbotResponse(data.messages);
 res.send(response.content);
     // res.send(test(data.messages));
+    let dbdata={
+        created_at: new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }),
+      request:data,
+        response:response
+    };
+        // Insert the log entry into Supabase
+    const { data: logEntry, error } = await supabase
+        .from("azure_req_res")
+        .insert([dbdata]);
+
+    if (error) {
+        console.error("Error inserting log:", error);
+        // Handle the error  
+    } else {
+        // Access the inserted data  
+        console.log("Log entry inserted:", logEntry);
+    }
+        
+    }
 
   } 
 
