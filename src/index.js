@@ -48,7 +48,7 @@ const messages = [...mess,...messa];
   console.log(messages);
 
   const client = new OpenAIClient(endpoint, new AzureKeyCredential(azureApiKey));
-  const deploymentId = "gpt-35-turbo-16k";
+  const deploymentId = "gpt-35-turbo";
   const result = await client.getChatCompletions(deploymentId, messages);
 
   for (const choice of result.choices) {
