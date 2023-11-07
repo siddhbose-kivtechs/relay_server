@@ -24,7 +24,7 @@ const endpoint = process.env.ENDPOINT;
 const azureApiKey = process.env.AZURE_KEY;  
   
 const mess = [  
-  { role: "system", content: "You are a helpful assistant. You will talk like a pirate." }];
+  { role: "system", content: "You are a helpful assistant." }];
   
 function isValidFormat(message) {  
   if (typeof message !== 'object') return false; // Check if message is an object first.  
@@ -41,8 +41,10 @@ function isValidFormat(message) {
 //   }  
 // }  
 async function getChatbotResponse(messa) {
+  //  generate messages ultitlizing both the mess string and the user request
 const messages = [...mess];  
 messages.push(messa); 
+  console.log(messa);
 
   const client = new OpenAIClient(endpoint, new AzureKeyCredential(azureApiKey));
   const deploymentId = "gpt-35-turbo-16k";
