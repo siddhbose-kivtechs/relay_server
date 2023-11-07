@@ -73,7 +73,7 @@ app.all("*", async (req, res) => {
   } else {  
  
   const response = await getChatbotResponse(data.messages);
-res.send(response);
+res.send(response.content);
     // res.send(test(data.messages));
 
   }  
