@@ -51,10 +51,11 @@ const messages = [...mess,...messa];
   const deploymentId = "gpt-35-turbo";
   const result = await client.getChatCompletions(deploymentId, messages);
     console.log(result);
-  for (const choice of result.choices) {
-    // console.log(choice.message);
-    return (choice.message);
-  }
+  // for (const choice of result.choices) {
+  //   // console.log(choice.message);
+  //   return (choice.message);
+  // }
+  return  result;
 }
 
 function test(messa)
@@ -74,7 +75,7 @@ app.all("*", async (req, res) => {
   } else {  
  
   const response = await getChatbotResponse(data.messages);
-res.send(response.content);
+res.send(response);
     // res.send(test(data.messages));
     let dbdata={
         created_at: new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }),
