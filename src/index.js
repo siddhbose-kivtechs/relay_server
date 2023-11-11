@@ -77,7 +77,7 @@ app.all("*", async (req, res) => {
   const response = await getChatbotResponse(data.messages);
           for (const choice of response.choices) {
           // (choice.message);
-    res.send(choice.message);
+    res.send(choice.message.content);
  }
 //res.send(response);
     // res.send(test(data.messages));
