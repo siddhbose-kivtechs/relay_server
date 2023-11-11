@@ -75,7 +75,11 @@ app.all("*", async (req, res) => {
   } else {  
  
   const response = await getChatbotResponse(data.messages);
-res.send(response);
+          for (const choice of response.choices) {
+          // (choice.message);
+    res.send(choice.message);
+ }
+//res.send(response);
     // res.send(test(data.messages));
     let dbdata={
         created_at: new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }),
