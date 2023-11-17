@@ -73,11 +73,13 @@ app.all("*", async (req, res) => {
     res.send('No messages found in request body');  
     return;  
   } else {  
- 
+
+     
   const response = await getChatbotResponse(data.messages);
-          for (const choice of response.choices) {
+    // res.send(response.choices);
+      for (const choice of response.choices) {
           // (choice.message);
-    res.send(choice.message.content);
+    res.send(choice.message);
  }
 //res.send(response);
     // res.send(test(data.messages));
