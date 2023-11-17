@@ -50,12 +50,14 @@ const messages = [...mess,...messa];
   const client = new OpenAIClient(endpoint, new AzureKeyCredential(azureApiKey));
   const deploymentId = "gpt-35-turbo";
   const result = await client.getChatCompletions(deploymentId, messages);
-    console.log(result);
+console.log(result);
+  return result;
   // for (const choice of result.choices) {
-  //   // console.log(choice.message);
+  //   console.log(choice.message);
   //   return (choice.message);
   // }
-  return  result;
+ //     console.log("Tokens Used:", result.usage.totalTokens);  
+ //   console.log("Cost:", result.usage.totalCost); 
 }
 
 function test(messa)
@@ -73,19 +75,21 @@ app.all("*", async (req, res) => {
     res.send('No messages found in request body');  
     return;  
   } else {  
-
-     
+ 
   const response = await getChatbotResponse(data.messages);
     // res.send(response.choices);
       for (const choice of response.choices) {
           // (choice.message);
     res.send(choice.message);
  }
-//res.send(response);
+      // const tokenCount = response.usage.totalTokens;  
+  // const cost = response.usage.totalCost;  
+    // console.log(tokenCount);
+    // console.log(cost);
     // res.send(test(data.messages));
     let dbdata={
         created_at: new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }),
-        in:data,
+        input:data,
         out:response,
       ulid:ulidgen
     };
