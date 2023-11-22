@@ -80,7 +80,7 @@ app.all("*", async (req, res) => {
     // res.send(response.choices);
       for (const choice of response.choices) {
           // (choice.message);
-    res.send(choice.message);
+    res.send(choice.message.content);
  }
       // const tokenCount = response.usage.totalTokens;  
   // const cost = response.usage.totalCost;  
